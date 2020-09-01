@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
                 rb2d.AddForce(Vector2.up * flyForce * Time.deltaTime * 1000f);
         }
 
-        // Rotates ship            opposite        adjacent
+        // Rotates ship
         float angle = Mathf.Atan(rb2d.velocity.y / rotation) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
@@ -41,12 +41,12 @@ public class PlayerController : MonoBehaviour
         GameStateManager.GameState = GameState.Dead;
         restartScreen.SetActive(true);
         rb2d.AddForce(new Vector2(Random.Range(-10, dieForce), Random.Range(10, dieForce)));
-        Restart();
     }
 
     public void Restart()
     {
         transform.position = startPosition;
+        rb2d.velocity = Vector2.zero;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

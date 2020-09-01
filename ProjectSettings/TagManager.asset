@@ -3,9 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Spike
-  - Boundaries
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -45,6 +43,9 @@ TagManager:
     locked: 0
   - name: Spikes
     uniqueID: 2806180833
+    locked: 0
+  - name: Player
+    uniqueID: 3737745895
     locked: 0
   - name: Default
     uniqueID: 0

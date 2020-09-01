@@ -1,14 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
 public class SpikeManager : MonoBehaviour
 {
-    public GameObject player;  // Reference to player
-
     public GameObject parent;  // The parent of the spikes
     public GameObject spike;  // The original spike
-    public GameObject[] spikes;  // List of spikes
+    private GameObject[] spikes;  // List of spikes
 
     // Spike parameters
     public int distance;  // Distance between spikes
@@ -17,14 +14,11 @@ public class SpikeManager : MonoBehaviour
     public float spikeSpeed;
     public float destroyPoint = -10f;
 
-    // How many total spikes
-    public uint spikeCount = 5;
+    public uint spikeCount = 5;  // How many total spikes
 
-    // The right most spike
-    private GameObject backSpike;
+    private GameObject backSpike;  // The right most spike
 
-    // The x position of each spike in the beginning
-    private float[] startPositions;
+    private float[] startPositions;  // The x position of each spike in the beginning
 
     void Start()
     {
@@ -38,18 +32,13 @@ public class SpikeManager : MonoBehaviour
         startX += distance;
 
         // Spawns all the others
-        for (int i = 0; i < spikeCount - 1; i++)
+        for (int i = 1; i < spikeCount; i++)
         {
-            // Set position
             Vector3 position = new Vector3(startX, RandomHeight(), 0);
-            // Instatiates spike
             GameObject newSpike = Instantiate(spike, position, Quaternion.identity, parent.transform);
-            // Adds spike to list
-            spikes[i + 1] = newSpike;
-            // Remembers position for when restart
-            startPositions[i + 1] = startX;
-            // Sets position for next spike
-            startX += distance;
+            spikes[i] = newSpike;  // Adds spike to list
+            startPositions[i] = startX;  // Remembers position for restart
+            startX += distance;  // Sets position for next spike
         }
 
         backSpike = spikes.Last();
@@ -61,17 +50,18 @@ public class SpikeManager : MonoBehaviour
         {
             foreach (GameObject spike in spikes)
             {
-                if (spike.transform.position.x < destroyPoint)
+                if (spike.transform.position.x <= destroyPoint)
                 {
                     // Loops the spike to the back
-                    int height = Random.Range(minHeight, maxHeight);
                     float xPosition = backSpike.transform.position.x + distance;
-                    spike.transform.position = new Vector3(xPosition, height, 0);
+                    spike.transform.position = new Vector3(xPosition, RandomHeight(), 0);
                     backSpike = spike;
                 }
-
-                // Moves the spike
-                spike.transform.position += Vector3.left * Time.deltaTime * spikeSpeed;
+                else
+                {
+                    // Moves the spike
+                    spike.transform.position += Vector3.left * Time.deltaTime * spikeSpeed;
+                }
             }
         }
     }
@@ -80,6 +70,8 @@ public class SpikeManager : MonoBehaviour
     {
         for (int i = 0; i < spikes.Length; i++)
             spikes[i].transform.position = new Vector3(startPositions[i], RandomHeight(), 0);
+
+        backSpike = spikes.Last();
     }
 
     private float RandomHeight()
