@@ -4,7 +4,7 @@ using UnityEngine;
 public class SpikeManager : MonoBehaviour
 {
     public GameObject parent;  // The parent of the spikes
-    public GameObject spike;  // The original spike
+    public GameObject spikePair;  // The original spike
     private GameObject[] spikes;  // List of spikes
 
     // Spike parameters
@@ -26,8 +26,8 @@ public class SpikeManager : MonoBehaviour
         startPositions = new float[spikeCount];
 
         // Includes the original spike
-        float startX = spike.transform.position.x;
-        spikes[0] = spike;
+        float startX = spikePair.transform.position.x;
+        spikes[0] = spikePair;
         startPositions[0] = startX;
         startX += distance;
 
@@ -35,7 +35,7 @@ public class SpikeManager : MonoBehaviour
         for (int i = 1; i < spikeCount; i++)
         {
             Vector3 position = new Vector3(startX, RandomHeight(), 0);
-            GameObject newSpike = Instantiate(spike, position, Quaternion.identity, parent.transform);
+            GameObject newSpike = Instantiate(spikePair, position, Quaternion.identity, parent.transform);
             spikes[i] = newSpike;  // Adds spike to list
             startPositions[i] = startX;  // Remembers position for restart
             startX += distance;  // Sets position for next spike

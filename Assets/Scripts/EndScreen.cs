@@ -5,6 +5,7 @@ public class EndScreen : MonoBehaviour
 {
     public SpikeManager spikeManager;
     public PlayerController player;
+    public ScoreManager scoreManager;
 
     public Button restartButton;
 
@@ -17,6 +18,7 @@ public class EndScreen : MonoBehaviour
     {
         spikeManager.Restart();
         player.Restart();
+        scoreManager.Restart();
         GameStateManager.GameState = GameState.Playing;
         gameObject.SetActive(false);
     }

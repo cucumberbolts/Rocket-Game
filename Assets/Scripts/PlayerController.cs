@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject restartScreen;
 
+    public ScoreManager scoreManager;
+
     // Use this for resetting the game
     private Vector3 startPosition;
 
@@ -26,7 +28,6 @@ public class PlayerController : MonoBehaviour
         if (GameStateManager.IsState(GameState.Playing))
         {
             rb2d.gravityScale = 4.9f;
-
             if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow))
                 rb2d.AddForce(Vector2.up * flyForce * Time.deltaTime * 1000f);
         }
@@ -53,5 +54,13 @@ public class PlayerController : MonoBehaviour
     {
         if (GameStateManager.IsState(GameState.Playing))
             Die();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (GameStateManager.IsState(GameState.Playing))
+            // Detects if player passes the spike
+            if (collision.CompareTag("Spike"))
+                scoreManager.IncrementScore();
     }
 }
