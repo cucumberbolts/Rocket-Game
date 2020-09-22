@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     public uint dieForce;
 
-    public GameObject restartScreen;
+    public GameObject startScreen;
 
     public ScoreManager scoreManager;
 
@@ -30,18 +30,20 @@ public class PlayerController : MonoBehaviour
             rb2d.gravityScale = 4.9f;
             if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow))
                 rb2d.AddForce(Vector2.up * flyForce * Time.deltaTime * 1000f);
-        }
 
-        // Rotates ship
-        float angle = Mathf.Atan(rb2d.velocity.y / rotation) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            // Rotates ship
+            float angle = Mathf.Atan(rb2d.velocity.y / rotation) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        }
     }
 
     private void Die()
     {
         GameStateManager.GameState = GameState.Dead;
-        restartScreen.SetActive(true);
+        startScreen.SetActive(true);
         rb2d.AddForce(new Vector2(Random.Range(-10, dieForce), Random.Range(10, dieForce)));
+
+        scoreManager.UpdateHighScore();
     }
 
     public void Restart()
@@ -56,11 +58,12 @@ public class PlayerController : MonoBehaviour
             Die();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (GameStateManager.IsState(GameState.Playing))
             // Detects if player passes the spike
             if (collision.CompareTag("Spike"))
-                scoreManager.IncrementScore();
+                //scoreManager.Score++;
+                scoreManager.Score++;
     }
 }

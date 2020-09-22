@@ -3,23 +3,41 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    private uint score = 0;
-    public Text text;
+    public Text scoreText;
+    public Text highScoreText;
+
+    private int score;
+    public int Score
+    {
+        get
+        {
+            return score;
+        }
+        set
+        {
+            score = value;
+            scoreText.text = score.ToString();
+        }
+    }
 
     private void Start()
     {
+        highScoreText.text = "HighScore: " + PlayerPrefs.GetInt("HighScore", 0);
         Restart();
     }
 
     public void Restart()
     {
-        score = 0;
-        text.text = "0";
+        Score = 0;
+        UpdateHighScore();
     }
 
-    public void IncrementScore()
+    public void UpdateHighScore()
     {
-        score++;
-        text.text = score.ToString();
+        if (PlayerPrefs.GetInt("HighScore", 0) < score)
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            highScoreText.text = "HighScore: " + PlayerPrefs.GetInt("HighScore", 0).ToString();
+        }
     }
 }
