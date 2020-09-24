@@ -40,4 +40,9 @@ public class ScoreManager : MonoBehaviour
             highScoreText.text = "HighScore: " + PlayerPrefs.GetInt("HighScore", 0).ToString();
         }
     }
+
+    private void ResetHighScore()
+    {
+        PlayerPrefs.DeleteKey("HighScore");
+    }
 }

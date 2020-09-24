@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
     {
         if (GameStateManager.IsState(GameState.Playing))
         {
-            rb2d.gravityScale = 4.9f;
             if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow))
                 rb2d.AddForce(Vector2.up * flyForce * Time.deltaTime * 1000f);
 

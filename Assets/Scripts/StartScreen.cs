@@ -10,6 +10,12 @@ public class StartScreen : MonoBehaviour
     public Text text;
     public Button startButton;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+            StartGame();
+    }
+
     public void StartGame()
     {
         // Resets if player is dead
@@ -17,8 +23,9 @@ public class StartScreen : MonoBehaviour
             ResetGame();
 
         GameStateManager.GameState = GameState.Playing;
+        player.gameObject.GetComponent<Rigidbody2D>().gravityScale = 4.9f;
         gameObject.SetActive(false);
-        text.text = "Oof you died. Click the button to start again.";
+        text.text = "Oof you died. Press the space bar\nor the up arrow to start again.";
     }
 
     private void ResetGame()

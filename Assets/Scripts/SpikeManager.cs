@@ -12,7 +12,7 @@ public class SpikeManager : MonoBehaviour
     public int maxHeight;
     public int minHeight;
     public float spikeSpeed;
-    public float destroyPoint = -10f;
+    public float destroyPoint = -11f;
 
     public uint spikeCount = 5;  // How many total spikes
 
