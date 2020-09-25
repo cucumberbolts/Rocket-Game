@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public SpikeManager spikeManager;
     public GameObject startScreen;
     public ScoreManager scoreManager;
+    public GameObject deathScreen;
 
     public GameState GameState { get; set; } = GameState.Start;
 
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
     {
         GameState = GameState.Dead;
         scoreManager.UpdateHighScore();
-        startScreen.SetActive(true);
+        deathScreen.SetActive(true);
     }
 
     public void ResetGame()
@@ -34,10 +35,6 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        // Resets if player is dead
-        if (IsState(GameState.Dead))
-            ResetGame();
-
         GameState = GameState.Playing;
         player.gameObject.GetComponent<Rigidbody2D>().gravityScale = 4.9f;
         startScreen.SetActive(false);

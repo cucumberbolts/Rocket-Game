@@ -47,7 +47,9 @@ public class PlayerController : MonoBehaviour
     public void Restart()
     {
         transform.position = startPosition;
+        transform.rotation = Quaternion.identity;
         rb2d.velocity = Vector2.zero;
+        rb2d.gravityScale = 0.0f;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
