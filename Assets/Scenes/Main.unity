@@ -440,8 +440,8 @@ MonoBehaviour:
   spikeManager: {fileID: 1946698553}
   player: {fileID: 839929476}
   scoreManager: {fileID: 1486773718}
+  gameManager: {fileID: 1711635151}
   text: {fileID: 50504411}
-  startButton: {fileID: 0}
 --- !u!1 &348421900 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1978957243540672167, guid: 49b98bd61a412dc42b7de801074b4ddc,
@@ -698,6 +698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46f5b40df5ad26945bfa0e56aee9a435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 1711635151}
   flyForce: 6.3
   rotation: 20
   dieForce: 1000
@@ -1080,6 +1081,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1711635149
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1711635150}
+  - component: {fileID: 1711635151}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1711635150
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711635149}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 402.16507, y: 235.76668, z: -0.012026487}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1711635151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711635149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4b06c410166d3499d760216c043356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 839929476}
+  spikeManager: {fileID: 1946698553}
+  startScreen: {fileID: 312011085}
+  scoreManager: {fileID: 1486773718}
 --- !u!1 &1946698551
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,6 +1171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4bc314e052915440a1a2f7c17d586b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 1711635151}
   parent: {fileID: 1702239772}
   spikePair: {fileID: 348421900}
   distance: 5

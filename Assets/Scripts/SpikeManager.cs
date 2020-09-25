@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class SpikeManager : MonoBehaviour
 {
+    public GameManager gameManager;
+
     public GameObject parent;  // The parent of the spikes
     public GameObject spikePair;  // The original spike
     private GameObject[] spikes;  // List of spikes
@@ -46,7 +48,7 @@ public class SpikeManager : MonoBehaviour
 
     void Update()
     {
-        if (GameStateManager.IsState(GameState.Playing))
+        if (gameManager.IsState(GameState.Playing))
         {
             foreach (GameObject spike in spikes)
             {

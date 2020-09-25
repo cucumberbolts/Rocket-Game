@@ -2,6 +2,8 @@
 
 public class PlayerController : MonoBehaviour
 {
+    public GameManager gameManager;
+
     private Rigidbody2D rb2d;
 
     public float flyForce;
@@ -25,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (GameStateManager.IsState(GameState.Playing))
+        if (gameManager.IsState(GameState.Playing))
         {
             if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow))
                 rb2d.AddForce(Vector2.up * flyForce * Time.deltaTime * 1000f);
@@ -38,11 +40,8 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        GameStateManager.GameState = GameState.Dead;
-        startScreen.SetActive(true);
         rb2d.AddForce(new Vector2(Random.Range(-10, dieForce), Random.Range(10, dieForce)));
-
-        scoreManager.UpdateHighScore();
+        gameManager.Die();
     }
 
     public void Restart()
@@ -53,13 +52,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (GameStateManager.IsState(GameState.Playing))
+        if (gameManager.IsState(GameState.Playing))
             Die();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (GameStateManager.IsState(GameState.Playing))
+        if (gameManager.IsState(GameState.Playing))
             // Detects if player passes the spike
             if (collision.CompareTag("Spike"))
                 //scoreManager.Score++;

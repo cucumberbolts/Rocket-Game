@@ -7,31 +7,16 @@ public class StartScreen : MonoBehaviour
     public PlayerController player;
     public ScoreManager scoreManager;
 
+    public GameManager gameManager;
+
     public Text text;
-    public Button startButton;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-            StartGame();
-    }
-
-    public void StartGame()
-    {
-        // Resets if player is dead
-        if (GameStateManager.IsState(GameState.Dead))
-            ResetGame();
-
-        GameStateManager.GameState = GameState.Playing;
-        player.gameObject.GetComponent<Rigidbody2D>().gravityScale = 4.9f;
-        gameObject.SetActive(false);
-        text.text = "Oof you died. Press the space bar\nor the up arrow to start again.";
-    }
-
-    private void ResetGame()
-    {
-        spikeManager.Restart();
-        player.Restart();
-        scoreManager.Restart();
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
+        {
+            gameManager.StartGame();
+            text.text = "Oof you died. Press the space bar\nor the up arrow to start again.";
+        }
     }
 }
